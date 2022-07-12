@@ -25,8 +25,8 @@ public class Controller {
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
 
-    public void adminCreateUser(@RequestBody ProcessEntity process) {
-        service.AddProcess(process);
+    public void adminCreateUser(@RequestBody ProcessEntity newProcess) {
+        service.AddProcess(newProcess);
     }
 
 }
