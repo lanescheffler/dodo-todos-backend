@@ -19,6 +19,14 @@ public class Controller {
     @Autowired
     public Controller(@NonNull PublicService service) { this.service = service; }
 
+    @PostMapping(
+            value = "/createProcess",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
 
+    public void adminCreateUser(@RequestBody ProcessEntity process) {
+        service.AddProcess(process);
+    }
 
 }

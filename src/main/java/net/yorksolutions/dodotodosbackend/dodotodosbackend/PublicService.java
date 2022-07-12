@@ -1,6 +1,6 @@
 package net.yorksolutions.dodotodosbackend.dodotodosbackend;
 
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class PublicService {
 
     private ProcessRepository processRepository;
@@ -26,9 +27,20 @@ public class PublicService {
 //    }
 
     @Autowired
-    public PublicService(@NonNull ProcessRepository processRepository) {
+    public PublicService(@NonNull ProcessRepository processRepository){
         this.processRepository = processRepository;
         this.tokenMap = new HashMap<>();
+    }
+
+    public void AddProcess(ProcessEntity process) {
+        Optional<ProcessEntity> createdProcess = processRepository.findByTitle(process.getTitle());
+        if (createdProcess.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
+            ProcessEntity newProcess = new ProcessEntity(process.getTitle(), process.getId(), process.isFinished(), process.isStarted());
+            processRepository.save(newProcess);
+        }
+
     }
 
 }

@@ -15,16 +15,16 @@ public class ProcessEntity {
 
     private String title;
 
-    private boolean ifFinished;
+    private boolean isFinished;
 
     private boolean isStarted;
 
-    public ProcessEntity() {};
+    public ProcessEntity() {}
 
-    public ProcessEntity(Long id, String title, boolean ifFinished, boolean isStarted) {
+    public ProcessEntity(String title, Long id, boolean isFinished, boolean isStarted) {
         this.id = id;
         this.title = title;
-        this.ifFinished = ifFinished;
+        this.isFinished = isFinished;
         this.isStarted = isStarted;
     }
 
@@ -44,12 +44,12 @@ public class ProcessEntity {
         this.title = title;
     }
 
-    public boolean isIfFinished() {
-        return ifFinished;
+    public boolean isFinished() {
+        return isFinished;
     }
 
-    public void setIfFinished(boolean ifFinished) {
-        this.ifFinished = ifFinished;
+    public void setFinished(boolean isFinished) {
+        this.isFinished = isFinished;
     }
 
     public boolean isStarted() {
