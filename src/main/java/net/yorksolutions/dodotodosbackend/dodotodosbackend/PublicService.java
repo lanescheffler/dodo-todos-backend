@@ -58,5 +58,11 @@ public class PublicService {
         });
     }
 
+    public void deleteProcess(String title) {
+        Optional<ProcessEntity> result = processRepository.findByTitle(title);
+        if(result.isPresent()) {
+            processRepository.deleteById(result.get().getId());
+        }
+    }
 }
 

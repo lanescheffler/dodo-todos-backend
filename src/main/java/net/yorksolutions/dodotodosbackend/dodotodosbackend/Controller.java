@@ -43,4 +43,10 @@ public class Controller {
 
     }
 
+    @DeleteMapping(
+            value="/deleteProcess/{title}"
+    )
+    public void deleteProcess(@PathVariable String title) {service.deleteProcess(title);
+    }
+
 }
