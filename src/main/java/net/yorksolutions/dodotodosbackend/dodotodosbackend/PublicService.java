@@ -1,6 +1,8 @@
 package net.yorksolutions.dodotodosbackend.dodotodosbackend;
 
 //import org.jetbrains.annotations.NotNull;
+
+import org.apache.tomcat.jni.Proc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -27,7 +29,7 @@ public class PublicService {
 //    }
 
     @Autowired
-    public PublicService(@NonNull ProcessRepository processRepository){
+    public PublicService(@NonNull ProcessRepository processRepository) {
         this.processRepository = processRepository;
         this.tokenMap = new HashMap<>();
     }
@@ -43,4 +45,18 @@ public class PublicService {
 
     }
 
+    public List<ProcessEntity> displayProcessList() {
+        // this name cannot be the same name as your processList/state on front end
+        List<ProcessEntity> toDoList = (List<ProcessEntity>) processRepository.findAll();
+        return toDoList;
+    }
+
+    public void editProcess(ProcessEntity process, String title) {
+        processRepository.findByTitle(title).map(e -> {
+            e.setTitle(process.getTitle());
+            return processRepository.save(e);
+        });
+    }
+
 }
+
