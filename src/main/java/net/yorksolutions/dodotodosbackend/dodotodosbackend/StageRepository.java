@@ -10,10 +10,11 @@ import java.util.Optional;
 @Repository
 public interface StageRepository extends CrudRepository<StageEntity, Long> {
 
-    Optional<StageEntity> findByPromptu(String promptu);
+    Optional<StageEntity> findByProcessId(String processId);
 
     Optional<StageEntity> findById(Long id);
 
+//    Optional<StageEntity> findByPromptu(String promptu);
 //    Optional<ThreadList> findByCurrentUser(String currentUser);
 //    Optional<ThreadList> findByTitle(String title);
 

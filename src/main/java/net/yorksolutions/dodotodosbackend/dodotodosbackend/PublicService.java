@@ -47,7 +47,7 @@ public class PublicService {
     }
 
     public void AddStage(StageEntity stage) {
-        Optional<StageEntity> createdStage = stageRepository.findByPromptu(stage.getPromptu());
+        Optional<StageEntity> createdStage = stageRepository.findByProcessId(stage.getPromptu());
         if (createdStage.isPresent()) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         } else {
