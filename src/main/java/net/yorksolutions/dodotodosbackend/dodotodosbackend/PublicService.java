@@ -19,7 +19,7 @@ public class PublicService {
 
     private ProcessRepository processRepository;
 
-//    private StageRepository stageRepository;
+    private StageRepository stageRepository;
 
     private HashMap<UUID, Long> tokenMap;
 
@@ -29,8 +29,9 @@ public class PublicService {
 //    }
 
     @Autowired
-    public PublicService(@NonNull ProcessRepository processRepository) {
+    public PublicService(@NonNull ProcessRepository processRepository, StageRepository stageRepository) {
         this.processRepository = processRepository;
+        this.stageRepository = stageRepository;
         this.tokenMap = new HashMap<>();
     }
 
@@ -43,6 +44,16 @@ public class PublicService {
             processRepository.save(newProcess);
         }
 
+    }
+
+    public void AddStage(StageEntity stage) {
+        Optional<StageEntity> createdStage = stageRepository.findByPromptu(stage.getPromptu());
+        if (createdStage.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
+            StageEntity newStage = new StageEntity(stage.getId(), stage.getProcessId(), stage.getOrderNumber(), stage.getPromptu(), stage.isPending(), stage.isDone(), stage.getComments());
+            stageRepository.save(newStage);
+        }
     }
 
     public List<ProcessEntity> displayProcessList() {

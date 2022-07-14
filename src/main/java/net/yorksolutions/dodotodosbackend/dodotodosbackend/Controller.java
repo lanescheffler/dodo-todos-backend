@@ -30,6 +30,16 @@ public class Controller {
         service.AddProcess(newProcess);
     }
 
+    @PostMapping(
+            value = "/createStage",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+
+    public void CreateStage(@RequestBody StageEntity newStage) {
+        service.AddStage(newStage);
+    }
+
     @GetMapping("/getProcessList")
     public List<ProcessEntity> displayProcessList () {
         return service.displayProcessList();
