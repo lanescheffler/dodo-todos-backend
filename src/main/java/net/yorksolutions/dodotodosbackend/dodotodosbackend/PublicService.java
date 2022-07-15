@@ -62,6 +62,12 @@ public class PublicService {
         return toDoList;
     }
 
+    public List<StageEntity> displayStageList() {
+        // this name cannot be the same name as your processList/state on front end
+        List<StageEntity> stepList = (List<StageEntity>) stageRepository.findAll();
+        return stepList;
+    }
+
     public void editProcess(ProcessEntity process, String title) {
         processRepository.findByTitle(title).map(e -> {
             e.setTitle(process.getTitle());

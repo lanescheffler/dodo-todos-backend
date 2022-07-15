@@ -45,6 +45,11 @@ public class Controller {
         return service.displayProcessList();
     }
 
+    @GetMapping("/getStageList")
+    public List<StageEntity> displayStageList () {
+        return service.displayStageList();
+    }
+
     @PutMapping(
             value="/editProcess/{title}"
     )
