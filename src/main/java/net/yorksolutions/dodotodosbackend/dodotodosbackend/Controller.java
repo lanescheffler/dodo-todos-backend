@@ -58,6 +58,14 @@ public class Controller {
 
     }
 
+    @PutMapping(
+            value="/editStage/{id}"
+    )
+    public void EditStage(@RequestBody StageEntity stepToDo, @PathVariable Long id){
+        service.editStage(stepToDo, id);
+
+    }
+
     @DeleteMapping(
             value="/deleteProcess/{title}"
     )

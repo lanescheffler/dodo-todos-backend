@@ -75,6 +75,16 @@ public class PublicService {
         });
     }
 
+    public void editStage(StageEntity stage, Long id) {
+        stageRepository.findById(id).map(e -> {
+            e.setOrderNumber(stage.getOrderNumber());
+            e.setPromptu(stage.getPromptu());
+            e.setPending(stage.isPending());
+            e.setDone(stage.isDone());
+            return stageRepository.save(e);
+        });
+    }
+
     public void deleteProcess(String title) {
         Optional<ProcessEntity> result = processRepository.findByTitle(title);
         if(result.isPresent()) {
