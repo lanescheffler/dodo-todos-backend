@@ -40,6 +40,19 @@ public class Controller {
         service.AddStage(newStage);
     }
 
+//    @PostMapping(
+//            value = "/addUser",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//
+//    public void CreateUser(@RequestBody UserEntity user) {
+//        service.AddUser(user);
+//    }
+
+    @GetMapping("/addUser")
+    public void AddUser(@RequestParam String name, String processStarted) { service.AddUser(name, processStarted); }
+
     @GetMapping("/getProcessList")
     public List<ProcessEntity> displayProcessList () {
         return service.displayProcessList();

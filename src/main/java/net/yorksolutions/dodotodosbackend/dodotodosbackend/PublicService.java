@@ -21,6 +21,8 @@ public class PublicService {
 
     private StageRepository stageRepository;
 
+    private UserRepository userRepository;
+
     private HashMap<UUID, Long> tokenMap;
 
 //    public PublicService(ProcessRepository processRepository, HashMap<UUID, Long> tokenMap) {
@@ -29,9 +31,10 @@ public class PublicService {
 //    }
 
     @Autowired
-    public PublicService(@NonNull ProcessRepository processRepository, StageRepository stageRepository) {
+    public PublicService(@NonNull ProcessRepository processRepository, StageRepository stageRepository, UserRepository userRepository) {
         this.processRepository = processRepository;
         this.stageRepository = stageRepository;
+        this.userRepository = userRepository;
         this.tokenMap = new HashMap<>();
     }
 
@@ -55,6 +58,25 @@ public class PublicService {
             stageRepository.save(newStage);
         }
     }
+
+    public void AddUser(String name, String processStarted) {
+        if (userRepository.findByName(name).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
+            userRepository.save(new UserEntity(name, processStarted));
+        }
+    }
+
+//    public UUID StartProcess(String name, String processStarted) {
+//        Optional<UserEntity> result = userRepository.findByName(name);
+//        if (result.isPresent()) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+//        } else {
+//            final UUID token = UUID.randomUUID();
+//            tokenMap.put(token, result.get().id);
+//            return token;
+//        }
+//    }
 
     public List<ProcessEntity> displayProcessList() {
         // this name cannot be the same name as your processList/state on front end
