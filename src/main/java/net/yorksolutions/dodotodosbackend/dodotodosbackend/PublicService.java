@@ -113,5 +113,12 @@ public class PublicService {
             processRepository.deleteById(result.get().getId());
         }
     }
+
+    public void deleteStage(Long id) {
+        Optional<StageEntity> result = stageRepository.findById(id);
+        if(result.isPresent()) {
+            stageRepository.deleteById(result.get().getId());
+        }
+    }
 }
 

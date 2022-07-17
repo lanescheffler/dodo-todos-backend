@@ -85,4 +85,10 @@ public class Controller {
     public void deleteProcess(@PathVariable String title) {service.deleteProcess(title);
     }
 
+    @DeleteMapping(
+            value="/deleteStage/{id}"
+    )
+    public void deleteStage(@PathVariable Long id) {service.deleteStage(id);
+    }
+
 }
