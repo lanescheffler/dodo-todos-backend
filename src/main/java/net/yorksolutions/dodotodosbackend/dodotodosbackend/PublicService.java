@@ -67,16 +67,17 @@ public class PublicService {
         }
     }
 
-//    public UUID StartProcess(String name, String processStarted) {
-//        Optional<UserEntity> result = userRepository.findByName(name);
-//        if (result.isPresent()) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-//        } else {
-//            final UUID token = UUID.randomUUID();
-//            tokenMap.put(token, result.get().id);
-//            return token;
-//        }
-//    }
+    //currently getting a 401 error on this and idk why.
+    public UUID StartProcess(String name, String processStarted) {
+        Optional<UserEntity> result = userRepository.findByNameAndProcessStarted(name, processStarted);
+        if (result.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
+            final UUID token = UUID.randomUUID();
+            tokenMap.put(token, result.get().id);
+            return token;
+        }
+    }
 
     public List<ProcessEntity> displayProcessList() {
         // this name cannot be the same name as your processList/state on front end
@@ -103,6 +104,7 @@ public class PublicService {
             e.setPromptu(stage.getPromptu());
             e.setPending(stage.isPending());
             e.setDone(stage.isDone());
+            e.setComments(stage.getComments());
             return stageRepository.save(e);
         });
     }

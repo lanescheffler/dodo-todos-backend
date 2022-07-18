@@ -91,4 +91,7 @@ public class Controller {
     public void deleteStage(@PathVariable Long id) {service.deleteStage(id);
     }
 
+    @GetMapping("startProcess")
+    public UUID StartProcess(@RequestParam String name, String processStarted) {return service.StartProcess(name, processStarted); }
+
 }
