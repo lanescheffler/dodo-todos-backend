@@ -61,11 +61,11 @@ public class PublicService {
     }
 
     public void AddUser(String name, String processStarted) {
-//        if (userRepository.findByName(name).isPresent()) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-//        } else {
+        if (userRepository.findByName(name).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
             userRepository.save(new UserEntity(name, processStarted));
-//        }
+        }
     }
 
     //currently getting a 401 error on this and idk why.
