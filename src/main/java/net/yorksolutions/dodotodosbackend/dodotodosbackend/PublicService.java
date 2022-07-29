@@ -79,6 +79,15 @@ public class PublicService {
         }
     }
 
+    public void completeStep(StageEntity stage, Long stepId) {
+        stageRepository.findById(stepId).map(e -> {
+            e.setPending(stage.isPending());
+            e.setDone(stage.isDone());
+            e.setComments(stage.getComments());
+            return stageRepository.save(e);
+        });
+    }
+
     public List<ProcessEntity> displayProcessList() {
         // this name cannot be the same name as your processList/state on front end
         List<ProcessEntity> toDoList = (List<ProcessEntity>) processRepository.findAll();

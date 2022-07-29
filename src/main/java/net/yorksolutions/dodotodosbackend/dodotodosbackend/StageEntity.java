@@ -12,27 +12,7 @@ public class StageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
-//    public static void stepList(String[] args) {
-//        LinkedList<String> stageList = new LinkedList<>();
-//    }
-//
-//        stageList.add("michael");
-//
-//        stageList.remove("michael");
-//
-//        System.out.println(stageList);
-//
-//        stageList.offerLast("connor");
-//        stageList.add(2, "tina");
-//        stageList.set(1, "jesus");
-//
-//
-//        System.out.println(stageList);
-//
-//        String GOT = stageList.get(2);
-//
-//        System.out.println(GOT);
-//    }
+
     private Long id;
 
     private String processId;

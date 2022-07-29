@@ -8,5 +8,4 @@ public class SortFunction {
 //
 //    SELECT * FROM "public"."process_entity" ORDER BY "id" ASC LIMIT 300 OFFSET 0;
 
-
 }

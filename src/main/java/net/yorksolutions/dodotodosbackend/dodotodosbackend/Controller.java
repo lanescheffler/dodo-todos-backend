@@ -72,6 +72,14 @@ public class Controller {
     }
 
     @PutMapping(
+            value="/completeStep/{stepId}"
+    )
+    public void CompleteStep(@RequestBody StageEntity stepToDo, @PathVariable Long stepId){
+        service.completeStep(stepToDo, stepId);
+
+    }
+
+    @PutMapping(
             value="/editStage/{id}"
     )
     public void EditStage(@RequestBody StageEntity stepToDo, @PathVariable Long id){
