@@ -1,5 +1,6 @@
 package net.yorksolutions.dodotodosbackend.dodotodosbackend;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,11 @@ public interface StageRepository extends CrudRepository<StageEntity, Long> {
 
     Optional<StageEntity> findByProcessId(String processId);
     Optional<StageEntity> findById(Long id);
+
+    Optional<StageEntity> findByOrderNumber(float orderNumber);
+
+    Object findAll(Sort orderNumber);
+
 
 //    Optional<StageEntity> findByPromptu(String promptu);
 //    Optional<ThreadList> findByCurrentUser(String currentUser);

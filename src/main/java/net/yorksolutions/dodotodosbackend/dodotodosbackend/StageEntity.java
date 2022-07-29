@@ -17,7 +17,7 @@ public class StageEntity {
 
     private String processId;
 
-    private int orderNumber;
+    private float orderNumber;
 
     private String promptu;
 
@@ -30,7 +30,7 @@ public class StageEntity {
 
     public StageEntity() {};
 
-    public StageEntity(Long id, String processId, int orderNumber, String promptu, boolean pending, boolean done, String comments) {
+    public StageEntity(Long id, String processId, float orderNumber, String promptu, boolean pending, boolean done, String comments) {
         this.id = id;
         this.processId = processId;
         this.orderNumber = orderNumber;
@@ -56,11 +56,11 @@ public class StageEntity {
         this.processId = processId;
     }
 
-    public int getOrderNumber() {
+    public float getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(float orderNumber) {
         this.orderNumber = orderNumber;
     }
 

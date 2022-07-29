@@ -4,6 +4,7 @@ package net.yorksolutions.dodotodosbackend.dodotodosbackend;
 
 import org.apache.tomcat.jni.Proc;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -60,11 +61,11 @@ public class PublicService {
     }
 
     public void AddUser(String name, String processStarted) {
-        if (userRepository.findByName(name).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-        } else {
+//        if (userRepository.findByName(name).isPresent()) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+//        } else {
             userRepository.save(new UserEntity(name, processStarted));
-        }
+//        }
     }
 
     //currently getting a 401 error on this and idk why.
@@ -96,7 +97,7 @@ public class PublicService {
 
     public List<StageEntity> displayStageList() {
         // this name cannot be the same name as your processList/state on front end
-        List<StageEntity> stepList = (List<StageEntity>) stageRepository.findAll();
+        List<StageEntity> stepList = (List<StageEntity>) stageRepository.findAll(Sort.by(Sort.Direction.ASC, "orderNumber"));
         return stepList;
     }
 
@@ -108,14 +109,18 @@ public class PublicService {
     }
 
     public void editStage(StageEntity stage, Long id) {
-        stageRepository.findById(id).map(e -> {
-            e.setOrderNumber(stage.getOrderNumber());
-            e.setPromptu(stage.getPromptu());
-            e.setPending(stage.isPending());
-            e.setDone(stage.isDone());
-            e.setComments(stage.getComments());
-            return stageRepository.save(e);
-        });
+        if (stageRepository.findByOrderNumber(stage.getOrderNumber()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        } else {
+            stageRepository.findById(id).map(e -> {
+                e.setOrderNumber(stage.getOrderNumber());
+                e.setPromptu(stage.getPromptu());
+                e.setPending(stage.isPending());
+                e.setDone(stage.isDone());
+                e.setComments(stage.getComments());
+                return stageRepository.save(e);
+            });
+        }
     }
 
     public void deleteProcess(String title) {
